@@ -1,4 +1,4 @@
-set(proj python-scipy)
+set(proj python-tensorflow)
 
 # Set dependency list
 set(${proj}_DEPENDENCIES python python-setuptools python-pip)
@@ -6,12 +6,12 @@ set(${proj}_DEPENDENCIES python python-setuptools python-pip)
 set(requirements_file ${CMAKE_BINARY_DIR}/${proj}-requirements.txt)
 file(WRITE ${requirements_file} [===[
 # Hashes correspond to the following packages:
-# - scipy-1.4.1-cp36-cp36m-win_amd64.whl
-# - scipy-1.4.1-cp36-cp36m-macosx_10_6_intel.whl
-# - scipy-1.4.1-cp36-cp36m-manylinux1_x86_64.whl
-scipy==1.4.1 --hash=sha256:dc60bb302f48acf6da8ca4444cfa17d52c63c5415302a9ee77b3b21618090521 \
-             --hash=sha256:bb517872058a1f087c4528e7429b4a44533a902644987e7b2fe35ecc223bc408 \
-             --hash=sha256:386086e2972ed2db17cebf88610aab7d7f6e2c0ca30042dc9a89cf18dcc363fa
+# - tensorflow-2.0.1-cp36-cp36m-win_amd64.whl
+# - tensorflow-2.0.1-cp36-cp36m-macosx_10_9_x86_64.whl
+# - tensorflow-2.0.1-cp36-cp36m-manylinux2010_x86_64.whl
+tensorflow==2.0.1 --hash=sha256:c63b2849ff2706a4df5183ee0bf3905027afc3de0c799e940c62745c71b1bf89 \
+                  --hash=sha256:173079089330dd740a68de2a14140e4b8406f60976ba368e5f91a612f9f2de7a \
+                  --hash=sha256:34017743df7c8abcfcde52831693cab5230da25a135f8fa7e7c6c48927112269
 ]===])
 
 if(NOT DEFINED Slicer_USE_SYSTEM_${proj})
@@ -22,7 +22,7 @@ endif()
 ExternalProject_Include_Dependencies(${proj} PROJECT_VAR proj DEPENDS_VAR ${proj}_DEPENDENCIES)
 
 if(Slicer_USE_SYSTEM_${proj})
-  foreach(module_name IN ITEMS scipy)
+  foreach(module_name IN ITEMS tensorflow)
     ExternalProject_FindPythonPackage(
       MODULE_NAME "${module_name}"
       REQUIRED
@@ -65,8 +65,8 @@ if(NOT Slicer_USE_SYSTEM_${proj})
   # Launcher setting specific to build tree
 
   set(${proj}_LIBRARY_PATHS_LAUNCHER_BUILD
-    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/core
-    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/lib
+    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/tensorflow/core
+    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/tensorflow/lib
     )
   mark_as_superbuild(
     VARS ${proj}_LIBRARY_PATHS_LAUNCHER_BUILD
@@ -77,8 +77,8 @@ if(NOT Slicer_USE_SYSTEM_${proj})
   # Launcher setting specific to install tree
 
   set(${proj}_LIBRARY_PATHS_LAUNCHER_INSTALLED
-    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/core
-    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/lib
+    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/tensorflow/core
+    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/tensorflow/lib
     )
   mark_as_superbuild(
     VARS ${proj}_LIBRARY_PATHS_LAUNCHER_INSTALLED

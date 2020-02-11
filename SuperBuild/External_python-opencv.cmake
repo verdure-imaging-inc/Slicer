@@ -1,4 +1,4 @@
-set(proj python-scipy)
+set(proj python-opencv)
 
 # Set dependency list
 set(${proj}_DEPENDENCIES python python-setuptools python-pip)
@@ -6,12 +6,12 @@ set(${proj}_DEPENDENCIES python python-setuptools python-pip)
 set(requirements_file ${CMAKE_BINARY_DIR}/${proj}-requirements.txt)
 file(WRITE ${requirements_file} [===[
 # Hashes correspond to the following packages:
-# - scipy-1.4.1-cp36-cp36m-win_amd64.whl
-# - scipy-1.4.1-cp36-cp36m-macosx_10_6_intel.whl
-# - scipy-1.4.1-cp36-cp36m-manylinux1_x86_64.whl
-scipy==1.4.1 --hash=sha256:dc60bb302f48acf6da8ca4444cfa17d52c63c5415302a9ee77b3b21618090521 \
-             --hash=sha256:bb517872058a1f087c4528e7429b4a44533a902644987e7b2fe35ecc223bc408 \
-             --hash=sha256:386086e2972ed2db17cebf88610aab7d7f6e2c0ca30042dc9a89cf18dcc363fa
+# - opencv_contrib_python-4.2.0.32-cp36-cp36m-win_amd64.whl
+# - opencv_contrib_python-4.2.0.32-cp36-cp36m-macosx_10_9_x86_64.whl
+# - opencv_contrib_python-4.2.0.32-cp36-cp36m-manylinux1_x86_64.whl
+opencv-contrib-python==4.2.0.32 --hash=sha256:91b29762634f20e3bafe7bc2c9361aeb48efb8bf8bf33f47d5985fea9fcad0cf \
+                                --hash=sha256:59a80f0bbaee09dad0ff9800b22bcee9f9432a645e25be49922782ceb4500bfd \
+                                --hash=sha256:564eec2471439ef7e5835a5c7ec4e379575cd2f115a3f4c67d8ae8078a47a7fd
 ]===])
 
 if(NOT DEFINED Slicer_USE_SYSTEM_${proj})
@@ -22,7 +22,7 @@ endif()
 ExternalProject_Include_Dependencies(${proj} PROJECT_VAR proj DEPENDS_VAR ${proj}_DEPENDENCIES)
 
 if(Slicer_USE_SYSTEM_${proj})
-  foreach(module_name IN ITEMS scipy)
+  foreach(module_name IN ITEMS opencv-contrib-python)
     ExternalProject_FindPythonPackage(
       MODULE_NAME "${module_name}"
       REQUIRED
@@ -65,8 +65,8 @@ if(NOT Slicer_USE_SYSTEM_${proj})
   # Launcher setting specific to build tree
 
   set(${proj}_LIBRARY_PATHS_LAUNCHER_BUILD
-    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/core
-    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/lib
+    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/opencv_contrib_python/core
+    ${python_DIR}/${PYTHON_SITE_PACKAGES_SUBDIR}/opencv_contrib_python/lib
     )
   mark_as_superbuild(
     VARS ${proj}_LIBRARY_PATHS_LAUNCHER_BUILD
@@ -77,8 +77,8 @@ if(NOT Slicer_USE_SYSTEM_${proj})
   # Launcher setting specific to install tree
 
   set(${proj}_LIBRARY_PATHS_LAUNCHER_INSTALLED
-    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/core
-    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/scipy/lib
+    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/opencv-contrib-python/core
+    <APPLAUNCHER_SETTINGS_DIR>/../lib/Python/${PYTHON_SITE_PACKAGES_SUBDIR}/opencv-contrib-python/lib
     )
   mark_as_superbuild(
     VARS ${proj}_LIBRARY_PATHS_LAUNCHER_INSTALLED
