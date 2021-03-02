@@ -64,13 +64,15 @@ if(NOT DEFINED CTK_DIR AND NOT Slicer_USE_SYSTEM_${proj})
 
   ExternalProject_SetIfNotDefined(
     Slicer_${proj}_GIT_REPOSITORY
-    "${EP_GIT_PROTOCOL}://github.com/commontk/CTK.git"
+    # "${EP_GIT_PROTOCOL}://github.com/commontk/CTK.git"
+    "${EP_GIT_PROTOCOL}://github.com/verdure-imaging-inc/CTK.git"
     QUIET
     )
 
   ExternalProject_SetIfNotDefined(
     Slicer_${proj}_GIT_TAG
-    "9a9573ec4e0653ee96fe02823ac7ee66b40d3b44"
+    # "9a9573ec4e0653ee96fe02823ac7ee66b40d3b44"
+    "afbd27867980d5c58ac972899f3003fd8a9a887c" # verdure-imaging-inc/custom-schema-and-roles
     QUIET
     )
 
