@@ -513,6 +513,13 @@ void qMRMLThreeDViewControllerWidget::setQuadBufferStereoSupportEnabled(bool val
 }
 
 // --------------------------------------------------------------------------
+QToolButton* qMRMLThreeDViewControllerWidget::centerButton()
+{
+  Q_D(qMRMLThreeDViewControllerWidget);
+  return d->CenterToolButton;
+}
+
+// --------------------------------------------------------------------------
 vtkMRMLViewLogic* qMRMLThreeDViewControllerWidget::viewLogic() const
 {
   Q_D(const qMRMLThreeDViewControllerWidget);

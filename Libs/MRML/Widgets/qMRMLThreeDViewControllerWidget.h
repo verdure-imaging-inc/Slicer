@@ -53,6 +53,9 @@ public:
 
   void setQuadBufferStereoSupportEnabled(bool value);
 
+  /// Get the 3D view re-center widget
+  Q_INVOKABLE QToolButton* centerButton();
+
   /// Get ViewLogic
   vtkMRMLViewLogic* viewLogic()const;
 
